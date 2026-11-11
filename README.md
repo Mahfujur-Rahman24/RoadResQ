@@ -31,42 +31,7 @@ RoadResQ is a full-stack Smart Road Accident Reporting and Response System proto
 - npm
 - MongoDB Community running locally, or a MongoDB Atlas connection string
 
-## Run locally
 
-1. Extract the project and open a terminal in the `RoadResQ_MERN` folder.
-2. Install dependencies:
-
-   ```bash
-   npm run install:all
-   ```
-
-3. Configure the API environment:
-
-   - Copy `server/.env.example` to `server/.env`
-   - Set `MONGO_URI` to your local MongoDB URI or MongoDB Atlas connection string
-   - Change `JWT_SECRET` to a long random secret
-
-4. Optional: copy `client/.env.example` to `client/.env` if your API URL differs from `http://localhost:5000/api`.
-5. Start MongoDB.
-6. Start both applications from the project root:
-
-   ```bash
-   npm run dev
-   ```
-
-7. Open the Vite URL printed in the terminal (usually `http://localhost:5173`). The API health endpoint is `http://localhost:5000/api/health`.
-
-## Demo logins
-
-The server creates these accounts automatically when it connects to an empty/new database. The UI pre-fills the relevant credentials on the login page.
-
-| Portal | Email | Password |
-|---|---|---|
-| Responder | `responder@roadresq.demo` | `Responder123!` |
-| Hospital | `hospital@roadresq.demo` | `Hospital123!` |
-| Admin | `admin@roadresq.demo` | `Admin123!` |
-
-Change or remove these demo accounts before deploying anywhere public.
 
 ## Public patient page
 
@@ -131,13 +96,3 @@ The public `/patients` page is not a public dump of hospital records. A hospital
 This is an academic demonstration project, not a certified emergency dispatch or hospital information system. The sample incidents and dashboard figures seeded for demonstration are not live emergency data. The map artwork in the current interface is illustrative rather than a verified GPS map. Bed availability is currently a local dashboard control and is not yet a multi-user synchronized inventory. Before real deployment, add HTTPS, strict CORS, rate limiting, input validation, audit logs, account provisioning and approval, secure password reset, backups, monitoring, formal privacy/legal review, and integration testing. Never use it as a substitute for calling emergency services.
 
 
-## Register a responder or hospital account
-
-1. Start MongoDB Atlas (or your local MongoDB) and configure `server/.env`.
-2. Open the website and choose **Register responder** or **Register hospital**, or open `/register`.
-3. Enter contact person's name, organization/service name, email and a password of at least 8 characters.
-4. For responder accounts, choose Ambulance, Police or Fire service.
-5. Submit the form. The API hashes the password and stores the new user in the MongoDB `users` collection. After successful registration, the user is signed in and redirected to the appropriate dashboard.
-6. Later, sign in from `/login` using the same email, password and selected account type.
-
-Only responder and hospital roles are allowed through public registration. Admin accounts are intentionally not self-registerable. This starter currently activates responder/hospital registrations immediately for development/demo use. Before public production deployment, add an admin approval workflow, strict CORS, HTTPS, rate limiting, email verification and audit logging.
